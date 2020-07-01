@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
-  const handleAmountChange = () => { };
-  const handleDurationChange = () => { };
+  const minAmount = 1000;
+  const maxAmount = 5000;
+
+
+  const minDuration = 6;
+  const maxDuration = 36;
+
+  const [amount, setAmount] = useState(1000);
+  const [duration, setDuration] = useState(6);
+
+  const handleAmountChange = (e) => { setAmount(e.target.value) };
+  const handleDurationChange = (e) => { setDuration(e.target.value) };
 
   return (
     <div className="App">
@@ -16,10 +26,15 @@ const App = () => {
       </header>
       <div>
         <label for="amount">Amount</label>
-        <input id="amount" type="range" min="1" max="100" value="50" onChange={handleAmountChange} />
+        <input id="amount" type="range" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
+        <p>{amount}</p>
 
         <label for="duration">Duration</label>
-        <input id="duration" type="range" min="1" max="100" value="50" onChange={handleDurationChange} />
+        <input id="duration" type="range" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
+        <p>{duration}</p>
+
+        <p>Your interest rate will be:</p>
+        <p>Your monthly payment will be:</p>
       </div>
     </div>
   );
