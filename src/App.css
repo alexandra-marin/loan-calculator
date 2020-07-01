@@ -1,5 +1,7 @@
 html, body {
   height: 100%;
+  font-size: larger;
+  font-family: 'Raleway';
 }
 
 .App {
@@ -26,7 +28,7 @@ header {
 
 .page-body {
   background-color: #d4fde6;
-  padding: 5%;
+  padding: 0 15%;
   flex: 1 1 auto;
   display: flex;
   align-content: center;
@@ -34,8 +36,11 @@ header {
 }
 
 .calculator {
+  background-color: #fff;
+  border: 3px solid #ffcbc9;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-self: center; 
+  align-items: center;
 }

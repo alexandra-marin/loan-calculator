@@ -1,9 +1,10 @@
 import React from 'react';
+import './Slider.css';
 
 const Slider = ({ label, id, min, max, value, onChange }) => {
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
+    <div className="container">
+      <label htmlFor={id}>{label}: {value}</label>
       <input
         id={id}
         type="range"
@@ -12,7 +13,6 @@ const Slider = ({ label, id, min, max, value, onChange }) => {
         value={value}
         onChange={onChange}
       />
-      <p>{value}</p>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { minAmount, maxAmount, minDuration, maxDuration } from './utils/constant
 import { requestEstimate } from './api/estimate';
 import logo from './logo.svg';
 import './App.css';
-import Slider from './components/Slider';
-import Result from './components/Result';
+import Slider from './components/Slider/Slider';
+import Result from './components/Result/Result';
 
 const App = () => {
   const [amount, setAmount] = useState(minAmount);
