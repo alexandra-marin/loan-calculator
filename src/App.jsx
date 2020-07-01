@@ -43,10 +43,12 @@ const App = () => {
         <img src={logo} className="logo" alt="Koyo Loans" />
         <p>Loan Calculator</p>
       </header>
-      <div className="calculator">
-        <Slider id="amount" label="Amount" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
-        <Slider id="duration" label="Duration" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
-        <Result nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
+      <div className="page-body">
+        <div className="calculator">
+          <Slider id="amount" label="Amount" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
+          <Slider id="duration" label="Duration" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
+          <Result nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
+        </div>
       </div>
     </div>
   );
