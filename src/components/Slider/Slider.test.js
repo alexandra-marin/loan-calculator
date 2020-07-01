@@ -3,6 +3,14 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import Slider from './Slider';
 
+test('Slider displays received values', () => {
+  const element = shallow(<Slider label={'TestLabel'} value={42} />);
+  const text = element.text();
+
+  expect(text).toContain('TestLabel');
+  expect(text).toContain('42');
+});
+
 test('Slider requests new estimate when is moved', () => {
   const spy = sinon.spy();
   const RangeInput = (on_change) => <Slider onChange={on_change} />;

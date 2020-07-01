@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Result from './Result';
 
-test('Slider requests new estimate when is moved', () => {
+test('Result displays received values', () => {
     const element = shallow(<Result nominalInterestRate={2} monthlyPayment={10} />);
     const text = element.text();
 
