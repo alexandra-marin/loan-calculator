@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import { minAmount, maxAmount, minDuration, maxDuration } from './utils/constants';
 import { requestEstimate } from './api/estimate';
@@ -7,7 +7,7 @@ import './App.css';
 import Slider from './components/Slider/Slider';
 import Result from './components/Result/Result';
 
-const App = () => {
+const App = React.memo(() => {
   const [amount, setAmount] = useState(minAmount);
   const [duration, setDuration] = useState(minDuration);
 
@@ -16,8 +16,8 @@ const App = () => {
 
   const [error, setError] = useState(null);
 
-  const handleAmountChange = (e) => { setAmount(e.target.value) };
-  const handleDurationChange = (e) => { setDuration(e.target.value) };
+  const handleAmountChange = useCallback((e) => { setAmount(e.target.value) }, []);
+  const handleDurationChange = useCallback((e) => { setDuration(e.target.value) }, []);
 
   const getEstimate = async (amount, duration) => {
     const { success, result } = await requestEstimate(amount, duration);
@@ -31,7 +31,7 @@ const App = () => {
     };
   };
 
-  const debounceOnChange = React.useCallback(debounce((amount, duration) => getEstimate(amount, duration), 400), []);
+  const debounceOnChange = useCallback(debounce((amount, duration) => getEstimate(amount, duration), 400), []);
 
   useEffect(() => {
     debounceOnChange(amount, duration);
@@ -52,6 +52,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+});
 
 export default App;

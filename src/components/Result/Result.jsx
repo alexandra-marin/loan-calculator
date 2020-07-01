@@ -1,7 +1,7 @@
 import React from 'react';
 import './Result.css';
 
-const Result = ({ nominalInterestRate, monthlyPayment, error }) => {
+const Result = React.memo(({ nominalInterestRate, monthlyPayment, error }) => {
   return (
     <div className="container">
       <p>Your interest rate will be: <b>{nominalInterestRate}</b></p>
@@ -9,6 +9,6 @@ const Result = ({ nominalInterestRate, monthlyPayment, error }) => {
       <p>{error}</p>
     </div>
   );
-};
+});
 
 export default Result;

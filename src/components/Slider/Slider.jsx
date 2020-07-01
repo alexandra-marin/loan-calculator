@@ -1,7 +1,7 @@
 import React from 'react';
 import './Slider.css';
 
-const Slider = ({ label, id, min, max, value, onChange }) => {
+const Slider = React.memo(({ label, id, min, max, value, onChange }) => {
   return (
     <div className="container">
       <label htmlFor={id}>{label}: {value}</label>
@@ -15,6 +15,6 @@ const Slider = ({ label, id, min, max, value, onChange }) => {
       />
     </div>
   );
-};
+});
 
 export default Slider;
