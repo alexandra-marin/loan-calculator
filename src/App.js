@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
+  const handleOnChange = () => { };
   return (
     <div className="App">
       <header className="App-header">
@@ -11,8 +12,9 @@ function App() {
           Loan Calculator
         </p>
       </header>
+
     </div>
   );
-}
+};
 
 export default App;
