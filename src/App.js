@@ -13,13 +13,24 @@ const App = () => {
   const [amount, setAmount] = useState(1000);
   const [duration, setDuration] = useState(6);
 
+  const [monthlyPayment, setMonthlyPayment] = useState('');
+  const [nominalInterestRate, setNominalInterestRate] = useState('');
+
+  const [error, setError] = useState(null);
+
   const handleAmountChange = (e) => { setAmount(e.target.value) };
   const handleDurationChange = (e) => { setDuration(e.target.value) };
 
   const fetchData = async () => {
-    console.log('>>> Requesting new estimate');
-    const response = await fetch("https://api.koyoloans.com/interest?amount=1000&numMonths=6");
-    console.log('>>>', await response.json());
+    try {
+      console.log('>>> Requesting new estimate');
+      const response = await fetch("https://api.koyoloans.com/interest?amount=1000&numMonths=6");
+      const { monthlyPayment, nominalInterestRate } = await response.json();
+      setMonthlyPayment(`${monthlyPayment.amount} ${monthlyPayment.currency}`);
+      setNominalInterestRate(`${nominalInterestRate}%`);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   const debounceOnChange = React.useCallback(debounce(fetchData, 400), []);
@@ -46,8 +57,10 @@ const App = () => {
         <input id="duration" type="range" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
         <p>{duration}</p>
 
-        <p>Your interest rate will be:</p>
-        <p>Your monthly payment will be:</p>
+        <p>Your interest rate will be: {nominalInterestRate}</p>
+        <p>Your monthly payment will be: {monthlyPayment}</p>
+
+        <p>{error}</p>
       </div>
     </div>
   );
