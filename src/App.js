@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import { minAmount, maxAmount, minDuration, maxDuration } from './utils/constants';
 import logo from './logo.svg';
 import './App.css';
+import { requestEstimate } from './api/estimate';
 
 const App = () => {
   const [amount, setAmount] = useState(minAmount);
@@ -16,24 +17,23 @@ const App = () => {
   const handleAmountChange = (e) => { setAmount(e.target.value) };
   const handleDurationChange = (e) => { setDuration(e.target.value) };
 
-  const fetchData = async (amount, duration) => {
-    try {
-      console.log('>>> Requesting new estimate', amount, duration);
-      const response = await fetch(`https://api.koyoloans.com/interest?amount=${amount}&numMonths=${duration}`);
-      const { monthlyPayment, nominalInterestRate } = await response.json();
+  const getEstimate = async (amount, duration) => {
+    const { success, result } = await requestEstimate(amount, duration);
+    if (success) {
+      const { monthlyPayment, nominalInterestRate } = result;
+
       setMonthlyPayment(`${monthlyPayment.amount} ${monthlyPayment.currency}`);
       setNominalInterestRate(`${nominalInterestRate}%`);
-    } catch (error) {
-      setError(error);
-    }
+    } else {
+      setError(result);
+    };
   };
 
-  const debounceOnChange = React.useCallback(debounce((amount, duration) => fetchData(amount, duration), 400), []);
+  const debounceOnChange = React.useCallback(debounce((amount, duration) => getEstimate(amount, duration), 400), []);
 
   useEffect(() => {
     debounceOnChange(amount, duration);
   }, [amount, duration, debounceOnChange]);
-
 
   return (
     <div className="App">
