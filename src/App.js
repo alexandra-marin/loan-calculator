@@ -21,10 +21,10 @@ const App = () => {
   const handleAmountChange = (e) => { setAmount(e.target.value) };
   const handleDurationChange = (e) => { setDuration(e.target.value) };
 
-  const fetchData = async () => {
+  const fetchData = async (amount, duration) => {
     try {
-      console.log('>>> Requesting new estimate');
-      const response = await fetch("https://api.koyoloans.com/interest?amount=1000&numMonths=6");
+      console.log('>>> Requesting new estimate', amount, duration);
+      const response = await fetch(`https://api.koyoloans.com/interest?amount=${amount}&numMonths=${duration}`);
       const { monthlyPayment, nominalInterestRate } = await response.json();
       setMonthlyPayment(`${monthlyPayment.amount} ${monthlyPayment.currency}`);
       setNominalInterestRate(`${nominalInterestRate}%`);
@@ -33,10 +33,10 @@ const App = () => {
     }
   };
 
-  const debounceOnChange = React.useCallback(debounce(fetchData, 400), []);
+  const debounceOnChange = React.useCallback(debounce((amount, duration) => fetchData(amount, duration), 400), []);
 
   useEffect(() => {
-    debounceOnChange();
+    debounceOnChange(amount, duration);
   }, [amount, duration, debounceOnChange]);
 
 
