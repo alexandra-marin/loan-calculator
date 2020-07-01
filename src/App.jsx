@@ -39,11 +39,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header className="header">
+        <img src={logo} className="logo" alt="Koyo Loans" />
         <p>Loan Calculator</p>
       </header>
-      <div>
+      <div className="calculator">
         <Slider id="amount" label="Amount" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
         <Slider id="duration" label="Duration" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
         <Result nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
