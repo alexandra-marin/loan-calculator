@@ -1,5 +1,7 @@
 ## About
 
+![Project photo](photo.png)
+
 This project is a loan calculator which allows a user to enter a loan amount and a loan duration in months and then displays the interest rate and the monthly payment.
 
 Uses functional components, hooks and minimal helper libraries (lodash).
