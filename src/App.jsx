@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import { minAmount, maxAmount, minDuration, maxDuration } from './utils/constants';
+import { requestEstimate } from './api/estimate';
 import logo from './logo.svg';
 import './App.css';
-import { requestEstimate } from './api/estimate';
+import Slider from './components/Slider';
+import Result from './components/Result';
 
 const App = () => {
   const [amount, setAmount] = useState(minAmount);
@@ -39,23 +41,12 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Loan Calculator
-        </p>
+        <p>Loan Calculator</p>
       </header>
       <div>
-        <label htmlFor="amount">Amount</label>
-        <input id="amount" type="range" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
-        <p>{amount}</p>
-
-        <label htmlFor="duration">Duration</label>
-        <input id="duration" type="range" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
-        <p>{duration}</p>
-
-        <p>Your interest rate will be: {nominalInterestRate}</p>
-        <p>Your monthly payment will be: {monthlyPayment}</p>
-
-        <p>{error}</p>
+        <Slider id="amount" label="Amount" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
+        <Slider id="duration" label="Duration" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
+        <Result nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
       </div>
     </div>
   );
