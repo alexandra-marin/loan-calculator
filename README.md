@@ -4,6 +4,8 @@ This project is a loan calculator which allows a user to enter a loan amount and
 
 Uses functional components, hooks and minimal helper libraries (lodash).
 
+Testing is done with React Testing Library, Enzyme and Sinon.
+
 ## Getting started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
