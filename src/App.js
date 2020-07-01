@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash.debounce';
+import { minAmount, maxAmount, minDuration, maxDuration } from './utils/constants';
 import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
-  const minAmount = 1000;
-  const maxAmount = 5000;
-
-  const minDuration = 6;
-  const maxDuration = 36;
-
-  const [amount, setAmount] = useState(1000);
-  const [duration, setDuration] = useState(6);
+  const [amount, setAmount] = useState(minAmount);
+  const [duration, setDuration] = useState(minDuration);
 
   const [monthlyPayment, setMonthlyPayment] = useState('');
   const [nominalInterestRate, setNominalInterestRate] = useState('');
