@@ -16,9 +16,7 @@ export const requestEstimate = async (amount, duration) => {
   } catch (error) {
     return {
       success: false,
-      result: {
-        error
-      }
+      result: error.message
     };
   }
 };
