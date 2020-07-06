@@ -15,11 +15,13 @@ const App = React.memo(() => {
   const [nominalInterestRate, setNominalInterestRate] = useState('');
 
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleAmountChange = useCallback((e) => { setAmount(e.target.value) }, []);
   const handleDurationChange = useCallback((e) => { setDuration(e.target.value) }, []);
 
   const getEstimate = async (amount, duration) => {
+    setIsLoading(true);
     const { success, result } = await requestEstimate(amount, duration);
     if (success) {
       const { monthlyPayment, nominalInterestRate } = result;
@@ -29,6 +31,7 @@ const App = React.memo(() => {
     } else {
       setError(result);
     };
+    setIsLoading(false);
   };
 
   const debounceOnChange = useCallback(debounce((amount, duration) => getEstimate(amount, duration), 400), []);
@@ -47,7 +50,7 @@ const App = React.memo(() => {
         <div className="calculator">
           <Slider id="amount" label="Amount" min={minAmount} max={maxAmount} value={amount} onChange={handleAmountChange} />
           <Slider id="duration" label="Duration" min={minDuration} max={maxDuration} value={duration} onChange={handleDurationChange} />
-          <Result nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
+          <Result isLoading={isLoading} nominalInterestRate={nominalInterestRate} monthlyPayment={monthlyPayment} error={error} />
         </div>
       </div>
     </div>
